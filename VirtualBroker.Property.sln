@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualBroker.Property.Data
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualBroker.Property.Data", "VirtualBroker.Property.Data\VirtualBroker.Property.Data.csproj", "{1A6DD9B3-8D72-4651-979F-F4A64BB12D90}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00 - Core", "00 - Core", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01 - Data", "01 - Data", "{8EBC4637-1103-4E0A-A225-08F58543C5B2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +34,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6A0162EC-91E4-4ADF-BAEA-E46792DE5A17} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{F8B59EF9-0916-4A5E-B053-8ABF78343EA3} = {8EBC4637-1103-4E0A-A225-08F58543C5B2}
+		{1A6DD9B3-8D72-4651-979F-F4A64BB12D90} = {8EBC4637-1103-4E0A-A225-08F58543C5B2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E0EB5DCA-1A47-471D-8C4C-94901F630A7D}
