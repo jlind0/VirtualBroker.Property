@@ -25,7 +25,7 @@ public partial class VirtualBrokersDbContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-         => optionsBuilder.UseSqlServer("Name=VirtualBrokers");
+         => optionsBuilder.UseSqlServer("Name=VirtualBroker");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

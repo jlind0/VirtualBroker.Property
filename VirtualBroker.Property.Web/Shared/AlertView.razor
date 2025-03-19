@@ -1,0 +1,69 @@
+﻿@inherits ReactiveInjectableComponentBase<AlertView.AlertViewModel>
+
+
+@if (ViewModel != null)
+{
+    <MudPopover Open="@ViewModel.IsOpen" Fixed="false" Class="mux-popover-fixed px-4 pt-4"
+                AnchorOrigin="Origin.CenterCenter">
+        <div class="d-flex flex-column">
+            <MudText>@ViewModel.Message</MudText>
+            <MudButton OnClick="@ViewModel.ToggleOpen" Class="ml-auto mr-n3 mb-1">Close</MudButton>
+        </div>
+    </MudPopover>
+}
+
+@code {
+    public class AlertViewModel : ReactiveObject
+    {
+        public void LoadAlertView(AlertView view)
+        {
+            view.Alert.RegisterHandler(async msg =>
+            {
+                Message = msg.Input;
+                IsOpen = true;
+
+                await slim.WaitAsync();
+                msg.SetOutput(true);
+
+            });
+        }
+        SemaphoreSlim slim = new SemaphoreSlim(0);
+        private bool isOpen;
+        public bool IsOpen
+        {
+            get => isOpen;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref isOpen, value);
+                if (!value)
+                    slim.Release();
+            }
+        }
+        private string message = null!;
+        public string Message
+        {
+            get => message;
+            set => this.RaiseAndSetIfChanged(ref message, value);
+        }
+        public void ToggleOpen()
+        {
+            IsOpen = !IsOpen;
+        }
+        public void Close()
+        {
+            IsOpen = false;
+        }
+    }
+
+    private Interaction<string, bool> alert = null!;
+    [Parameter]
+    public Interaction<string, bool> Alert
+    {
+        get => alert;
+        set
+        {
+            alert = value;
+            ViewModel?.LoadAlertView(this);
+        }
+    }
+}

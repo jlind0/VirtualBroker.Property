@@ -1,0 +1,43 @@
+﻿@inherits ReactiveInjectableComponentBase<UserBarLoaderViewModel>
+
+<AuthorizeView>
+    <Authorized>
+        @if (ViewModel?.ViewModel != null)
+        {
+            @* Laptop, Desktop *@
+            <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
+                <MudElement Class="d-flex align-content-center justify-end flex-grow-1 gap-2 mr-4">
+                    <ImpersonatorHeaderView>
+                        <MudText>Hello, @ViewModel.ViewModel.EmailAddress!</MudText>
+                    </ImpersonatorHeaderView>
+                </MudElement>
+            </MudHidden>
+
+            @* Smaller devices *@        
+            <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert="true">
+                <MudElement Class="d-flex flex-column justify-center flex-grow-1">
+                    <ImpersonatorHeaderView>
+                        <MudText>Hello, @ViewModel.ViewModel.EmailAddress!</MudText>
+                    </ImpersonatorHeaderView>
+                </MudElement>
+            </MudHidden>
+
+            <MudButton Class="fw-bold" Href="MicrosoftIdentity/Account/SignOut" Variant="Variant.Filled"
+                Color="Color.Primary">
+                Sign out
+            </MudButton>
+        }
+    </Authorized>
+    <NotAuthorized>
+        <MudButton class="fw-bold" Href="MicrosoftIdentity/Account/SignIn" Variant="Variant.Filled"
+            Color="Color.Primary">Sign in</MudButton>
+    </NotAuthorized>
+</AuthorizeView>
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        if (ViewModel != null)
+            await ViewModel.Load.Execute().GetAwaiter();
+        await base.OnInitializedAsync();
+    }
+}

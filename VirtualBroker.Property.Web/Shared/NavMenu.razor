@@ -1,0 +1,37 @@
+﻿@inject AuthenticationStateProvider AuthState
+@if (isAuthenticated)
+{
+    <MudNavMenu>
+        <ImpersonatorNavItemView />
+        <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">Home</MudNavLink>
+        @if (isAdmin)
+        {
+            <MudNavGroup Title="Admin" Icon="@Icons.Material.Filled.ManageAccounts" Expanded="false">
+                <MudNavLink Href="admin/users" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.SupervisorAccount">
+                    Users
+                </MudNavLink>
+                <MudNavLink Href="admin/roles" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Badge">
+                    Roles
+                </MudNavLink>
+                <MudNavLink Href="admin/zillow/apis" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Task">
+                    Zillow APIs
+                </MudNavLink>
+            </MudNavGroup>
+        }
+        <MudNavLink Href="profile" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.AccountBox">
+            Profile
+        </MudNavLink>
+    </MudNavMenu>
+}
+
+@code {
+    private bool isAdmin = false;
+    private bool isAuthenticated = false;
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthState.GetAuthenticationStateAsync();
+        isAdmin = true;// authState.User?.IsInRole("Admin") ?? false;
+        isAuthenticated = authState.User?.Identity?.IsAuthenticated ?? false;
+        await base.OnInitializedAsync();
+    }
+}
