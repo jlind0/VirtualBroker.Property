@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35913.81 d17.13
+VisualStudioVersion = 17.13.35913.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualBroker.Property.Core", "VirtualBroker.Property.Core\VirtualBroker.Property.Core.csproj", "{6A0162EC-91E4-4ADF-BAEA-E46792DE5A17}"
 EndProject
@@ -20,6 +20,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualBroker.Property.Business.Core", "VirtualBroker.Property.Business.Core\VirtualBroker.Property.Business.Core.csproj", "{2CF5C134-60F0-4243-82CC-F71844AA7493}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03 - Intermediary", "03 - Intermediary", "{40F104AC-217A-4C09-A438-F0734834F4BA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05 - ViewModels", "05 - ViewModels", "{7A6780D8-EC63-424C-BFD6-798B2882C3A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualBroker.Property.ViewModels", "VirtualBroker.Property.ViewModels\VirtualBroker.Property.ViewModels.csproj", "{A60A45B2-F1A1-4012-AE17-03CB106035FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +51,10 @@ Global
 		{2CF5C134-60F0-4243-82CC-F71844AA7493}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CF5C134-60F0-4243-82CC-F71844AA7493}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CF5C134-60F0-4243-82CC-F71844AA7493}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A60A45B2-F1A1-4012-AE17-03CB106035FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A60A45B2-F1A1-4012-AE17-03CB106035FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A60A45B2-F1A1-4012-AE17-03CB106035FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A60A45B2-F1A1-4012-AE17-03CB106035FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +65,7 @@ Global
 		{1A6DD9B3-8D72-4651-979F-F4A64BB12D90} = {8EBC4637-1103-4E0A-A225-08F58543C5B2}
 		{7265C9FF-0D39-4C84-9C10-FC2B36CCA20F} = {BD804B9F-4006-4C48-9811-29D243637DA7}
 		{2CF5C134-60F0-4243-82CC-F71844AA7493} = {BD804B9F-4006-4C48-9811-29D243637DA7}
+		{A60A45B2-F1A1-4012-AE17-03CB106035FC} = {7A6780D8-EC63-424C-BFD6-798B2882C3A2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E0EB5DCA-1A47-471D-8C4C-94901F630A7D}
