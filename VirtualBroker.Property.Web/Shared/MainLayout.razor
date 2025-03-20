@@ -1,5 +1,5 @@
 ﻿@inherits LayoutComponentBase
-
+@inject AuthenticationStateProvider AuthState
 <PageTitle>Virtual Broker Property - Your AI Real Estate Agent</PageTitle>
 @* TODO: support theme and manage its state manually in localstorage *@
 <MudThemeProvider Theme="@_theme" />
@@ -11,19 +11,25 @@
 <MudLayout>
 
     <MudAppBar Elevation="1">
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start"
-                       OnClick="@((e) => DrawerToggle())" />
+        @if (isAuthenticated)
+        {
+            <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start"
+            OnClick="@((e) => DrawerToggle())" />
+        }
         <MudText Typo="Typo.h5" Class="ml-3"></MudText>
         <MudSpacer />
         <LoginDisplay />
     </MudAppBar>
-
-    <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
-        <NavMenu />
-    </MudDrawer>
+    @if (isAuthenticated)
+    {
+        <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
+            <NavMenu />
+        </MudDrawer>
+    }
     <MudMainContent Class="mt-16 pa-4">
         @Body
     </MudMainContent>
+    
 </MudLayout>
 
 <div id="blazor-error-ui" data-nosnippet>
@@ -35,11 +41,12 @@
 @code {
     private bool _drawerOpen = true;
     private MudTheme? _theme = null;
-
-    protected override void OnInitialized()
+    private bool isAuthenticated = false;
+    protected override async Task OnInitializedAsync()
     {
-        base.OnInitialized();
-
+        var authState = await AuthState.GetAuthenticationStateAsync();
+        isAuthenticated = authState.User?.Identity?.IsAuthenticated ?? false;
+        await base.OnInitializedAsync();
         _theme = new()
             {
                 PaletteLight = _lightPalette,
