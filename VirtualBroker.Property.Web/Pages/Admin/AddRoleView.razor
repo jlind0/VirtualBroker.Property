@@ -1,0 +1,20 @@
+﻿@inherits ReactiveComponentBase<AddRoleViewModel>
+@if (ViewModel != null)
+{
+    <AlertView Alert="ViewModel.Alert"></AlertView>
+    <h3>Add Role</h3>
+    <MudStack Row="true">
+        <MudTextField id="roleName" Label="Role Name" @bind-Value="ViewModel.Name" Variant="Variant.Outlined">
+        </MudTextField>
+        <MudIconButton OnClick="ViewModel.Add.BindCommand<MouseEventArgs>()" Icon="@Icons.Material.Filled.AddBox"
+                       Color="Color.Primary" Size="Size.Large" aria-label="add" />
+    </MudStack>
+}
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && ViewModel != null)
+            await ViewModel.Init.Execute().GetAwaiter();
+        await base.OnAfterRenderAsync(firstRender);
+    }
+}

@@ -1,0 +1,18 @@
+﻿@page "/admin/roles/{RoleId:guid}"
+@attribute [Authorize(Roles = "Admin")]
+
+@inherits ReactiveInjectableComponentBase<RoleLoaderViewModel>
+@if (ViewModel != null && ViewModel.Id != null)
+{
+    <AlertView Alert="ViewModel.Alert" />
+    <RoleView ViewModel="ViewModel.ViewModel" />
+}
+@code {
+    [Parameter] public Guid RoleId { get; set; }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (ViewModel != null && firstRender)
+            await ViewModel.Load.Execute(RoleId).GetAwaiter();
+        await base.OnAfterRenderAsync(firstRender);
+    }
+}

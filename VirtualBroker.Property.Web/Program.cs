@@ -95,7 +95,11 @@ builder.Services.AddTransient<AlertView.AlertViewModel>();
 builder.Services.AddTransient<UserProfileLoaderViewModel>();
 builder.Services.AddTransient<UserBarLoaderViewModel>();
 builder.Services.AddTransient<ImpersonatorViewModel>();
-
+builder.Services.AddTransient<SelectUsersViewModel>();
+builder.Services.AddTransient<AddRoleViewModel>();
+builder.Services.AddTransient<RoleLoaderViewModel>();
+builder.Services.AddTransient<ManageRolesViewModel>();
+builder.Services.AddTransient<UsersViewModel>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSession(options =>
 {

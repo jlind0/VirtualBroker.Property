@@ -1,0 +1,14 @@
+﻿@inherits ReactiveComponentBase<RoleViewModel>
+@if (ViewModel != null)
+{
+        <AlertView Alert="ViewModel.Alert" />
+        <h3>Role: @ViewModel.Name</h3>
+        <MudStack Row="true">
+            <MudTextField @bind-Value="ViewModel.Name" Label="Name"/>
+            <MudButton OnClick="ViewModel.Update.BindCommand<MouseEventArgs>()" Color="Color.Primary">Update</MudButton>
+        </MudStack>
+        <SelectUsersView ViewModel="ViewModel.SelectedUsers"/>
+}
+@code {
+
+}

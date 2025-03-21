@@ -1,0 +1,35 @@
+﻿@inherits ReactiveComponentBase<SelectUsersViewModel>
+@if (ViewModel != null && ViewModel.IsInitialzed)
+{
+    <AlertView Alert="ViewModel.Alert" />
+    <h4>Selected Users</h4>
+    <MudDataGrid T="UserViewModel" Items="ViewModel.Selected">
+        <Columns>
+            <TemplateColumn Title="Selected">
+                <CellTemplate>
+                    <MudCheckBox @bind-Value="context.Item.IsSelected" />
+                </CellTemplate>
+            </TemplateColumn>
+            <PropertyColumn Title="Email" Property="x => x.EmailAddress" />
+            <PropertyColumn Title="Last Name" Property="x => x.LastName" />
+            <PropertyColumn Title="First Name" Property="x => x.FirstName" />
+        </Columns>
+    </MudDataGrid>
+
+    <h4>Users</h4>
+    <MudDataGrid T="UserViewModel" SortMode="SortMode.Multiple" Filterable="true" FilterMode="DataGridFilterMode.ColumnFilterMenu" ServerData="ViewModel.Fetch.BindServerDataCommand<Guid, User, UserViewModel>()">
+        <Columns>
+            <TemplateColumn Title="Selected">
+                <CellTemplate>
+                    <MudCheckBox @bind-Value="context.Item.IsSelected" />
+                </CellTemplate>
+            </TemplateColumn>
+            <PropertyColumn Title="Email" Property="x => x.EmailAddress" />
+            <PropertyColumn Title="Last Name" Property="x => x.LastName" />
+            <PropertyColumn Title="First Name" Property="x => x.FirstName" />
+        </Columns>
+    </MudDataGrid>
+}
+@code {
+
+}

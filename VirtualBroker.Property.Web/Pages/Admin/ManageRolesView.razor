@@ -1,0 +1,36 @@
+﻿@page "/admin/roles"
+@inherits ReactiveInjectableComponentBase<ManageRolesViewModel>
+@attribute [Authorize(Roles = "Admin")]
+@if (ViewModel != null)
+{
+    <AlertView Alert="ViewModel.Alert" />
+    <AddRoleView ViewModel="ViewModel.AddViewModel" />
+    <MudDataGrid @ref="grid" T="Role" ServerData="ViewModel.Fetch.BindServerDataCommand()"
+                 Filterable="true" FilterMode="DataGridFilterMode.ColumnFilterMenu"
+                 SortMode="SortMode.Multiple">
+        <Columns>
+            <PropertyColumn Property="x => x.Name" Title="Name" />
+            <TemplateColumn>
+                <CellTemplate>
+                    @{
+                        var strHref = $"/admin/roles/{context.Item.Id}";
+                        <MudLink Href="@strHref">(...)</MudLink>
+                    }
+                    
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+        <PagerContent>
+            <MudDataGridPager T="Role" />
+        </PagerContent>
+    </MudDataGrid>
+}
+@code {
+    private MudDataGrid<Role> grid = null!;
+    protected override void OnInitialized()
+    {
+        if (ViewModel != null)
+            ViewModel.Reload = async () => await grid.ReloadServerData();
+        base.OnInitialized();
+    }
+}

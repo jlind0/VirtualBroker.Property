@@ -12,6 +12,95 @@ using VirtualBroker.Property.Core;
 
 namespace VirtualBroker.Property.ViewModels.Admin
 {
+    public class UsersViewModel : ManageEntityViewModel<Guid, User, IUserBusinessFacade>
+    {
+        public UsersViewModel(IUserBusinessFacade facade, ILogger<ManageEntityViewModel<Guid, User, IUserBusinessFacade>> logger) : base(facade, logger)
+        {
+        }
+    }
+    public class SelectUsersViewModel : SelectEntitiesViewModel<Guid, User, UserViewModel, IUserBusinessFacade>
+    {
+        public SelectUsersViewModel(IUserBusinessFacade facade, ILogger<SelectEntitiesViewModel<Guid, User, UserViewModel, IUserBusinessFacade>> logger) : base(facade, logger)
+        {
+        }
+
+        protected override async Task<UserViewModel> ConstructViewModel(User entity)
+        {
+            var vm = new UserViewModel(Logger, Facade, entity);
+            await vm.Load.Execute().GetAwaiter();
+            return vm;
+        }
+    }
+    public class UserLoaderViewModel : EntityLoaderViewModel<Guid, User, UserViewModel, IUserBusinessFacade>
+    {
+        public UserLoaderViewModel(IUserBusinessFacade facade, ILogger<EntityLoaderViewModel<Guid, User, UserViewModel, IUserBusinessFacade>> logger) : base(facade, logger)
+        {
+        }
+
+        protected override UserViewModel Construct(User entity)
+        {
+            return new UserViewModel(Logger, Facade, entity.Id);
+        }
+    }
+    public class UserViewModel : EntityViewModel<Guid, User, IUserBusinessFacade>, IUser
+    {
+        public UserViewModel(ILogger logger, IUserBusinessFacade facade, Guid id) : base(logger, facade, id)
+        {
+        }
+
+        public UserViewModel(ILogger logger, IUserBusinessFacade facade, User entity) : base(logger, facade, entity)
+        {
+        }
+
+        private string objectId = null!;
+        public string ObjectId
+        {
+            get => objectId;
+            set => this.RaiseAndSetIfChanged(ref objectId, value);
+        }
+        private string? firstName;
+        public string? FirstName
+        {
+            get => firstName;
+            set => this.RaiseAndSetIfChanged(ref firstName, value);
+        }
+
+        private string? lastName;
+        public string? LastName
+        {
+            get => lastName;
+            set => this.RaiseAndSetIfChanged(ref lastName, value);
+        }
+
+        private string? emailAddress;
+        public string? EmailAddress
+        {
+            get => emailAddress;
+            set => this.RaiseAndSetIfChanged(ref emailAddress, value);
+        }
+
+       
+
+        protected override Task<User> Populate()
+        {
+            User user = new User();
+            user.Id = Id;
+            user.ObjectId = ObjectId;
+            user.FirstName = FirstName;
+            user.LastName = LastName;
+            user.EmailAddress = EmailAddress;
+            return Task.FromResult(user);
+        }
+
+        protected override async Task Read(User entity)
+        {
+            Id = entity.Id;
+            ObjectId = entity.ObjectId;
+            FirstName = entity.FirstName;
+            LastName = entity.LastName;
+            EmailAddress = entity.EmailAddress;
+        }
+    }
     public class UserBarLoaderViewModel : UserProfileLoaderViewModel
     {
         public UserBarLoaderViewModel(IUserBusinessFacade facade, ILogger<UserProfileLoaderViewModel> logger) : base(facade, logger)

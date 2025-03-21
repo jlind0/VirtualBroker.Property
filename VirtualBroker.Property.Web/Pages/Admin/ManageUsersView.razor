@@ -1,0 +1,24 @@
+﻿@page "/admin/users"
+@inherits ReactiveInjectableComponentBase<UsersViewModel>
+@attribute [Authorize(Roles = "Admin")]
+@if (ViewModel != null)
+{
+    <AlertView Alert="ViewModel.Alert" />
+    <h3>Users</h3>
+    <MudDataGrid T="User" Filterable="true" FilterMode="DataGridFilterMode.ColumnFilterMenu"
+                 SortMode="SortMode.Multiple"
+                 ServerData="ViewModel.Fetch.BindServerDataCommand()">
+        <Columns>
+            <PropertyColumn Property="x => x.ObjectId" Title="Object Id" Filterable="false" Sortable="false" />
+            <PropertyColumn Property="x => x.FirstName" Title="First Name" />
+            <PropertyColumn Property="x => x.LastName" Title="Last Name" />
+            <PropertyColumn Property="x => x.EmailAddress" Title="Email" />
+        </Columns>
+        <PagerContent>
+            <MudDataGridPager T="User" />
+        </PagerContent>
+    </MudDataGrid>
+}
+@code {
+
+}
