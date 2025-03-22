@@ -85,10 +85,12 @@ var connectionString = builder.Configuration.GetConnectionString("VirtualBroker"
 builder.Services.AddDbContext<VirtualBrokersDbContext>(options =>
     options.UseSqlServer(connectionString), ServiceLifetime.Scoped);
 builder.Services.AddScoped<IContextFactory, ContextFactory>();
-builder.Services.AddScoped<IRepository<Role, Guid>, Repository<Role, Guid>>();
+builder.Services.AddScoped<IRepository<Role, Guid>, RoleRepository>();
+builder.Services.AddScoped<IRepository<APIRequests_Zillow, Guid>, Repository<APIRequests_Zillow, Guid>>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
-builder.Services.AddScoped<IBusinessRepositoryFacade<Role, Guid>, BusinessRepositoryFacade<Role, Guid, IRepository<Role, Guid>>>();
+builder.Services.AddScoped<IBusinessRepositoryFacade<Role, Guid>, RoleBusinessFacade>();
+builder.Services.AddScoped<IBusinessRepositoryFacade<APIRequests_Zillow, Guid>, BusinessRepositoryFacade<APIRequests_Zillow, Guid, IRepository<APIRequests_Zillow, Guid>>>();
 builder.Services.AddScoped<IUserBusinessFacade, UserBusinessFacade>();
 builder.Services.AddScoped<IRoleBusinessFacade, RoleBusinessFacade>();
 builder.Services.AddTransient<AlertView.AlertViewModel>();
@@ -100,6 +102,8 @@ builder.Services.AddTransient<AddRoleViewModel>();
 builder.Services.AddTransient<RoleLoaderViewModel>();
 builder.Services.AddTransient<ManageRolesViewModel>();
 builder.Services.AddTransient<UsersViewModel>();
+builder.Services.AddTransient<AddApiRequest_ZillowViewModel>();
+builder.Services.AddTransient<ApiRequest_ZillowsViewModel>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSession(options =>
 {

@@ -36,7 +36,7 @@ public partial class VirtualBrokersDbContext : DbContext
             entity.HasIndex(e => e.Code, "IX_APIRequests_Zillow").IsUnique();
 
             entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
-            entity.Property(e => e.ApIKey).HasMaxLength(1000);
+            entity.Property(e => e.ApiKey).HasMaxLength(1000);
             entity.Property(e => e.ApiHost).HasMaxLength(1000);
             entity.Property(e => e.Code)
                 .HasMaxLength(4)

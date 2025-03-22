@@ -1,0 +1,21 @@
+﻿@inherits ReactiveComponentBase<ApiRequest_ZillowViewModel>
+
+@if (ViewModel != null)
+{
+    <AlertView Alert="ViewModel.Alert" />
+    <MudStack>
+        <MudText>Name: @ViewModel.Name | Code: @ViewModel.Code</MudText>
+        <MudTextField @bind-Value="ViewModel.ApiHost" Label="Host" Variant="Variant.Outlined" />
+        <MudTextField @bind-Value="ViewModel.ApiKey" Label="Key" Variant="Variant.Outlined" />
+        <MudTextField @bind-Value="ViewModel.RequestUri" Label="Uri" Variant="Variant.Outlined"/>
+        <MudStack Row="true">
+            <MudButton OnClick="ViewModel.Update.BindCommand<MouseEventArgs>()" Class="fw-bold" Variant="Variant.Filled"
+                Color="Color.Primary">Update</MudButton>
+            <MudButton OnClick="ViewModel.Delete.BindCommand<MouseEventArgs>()" Class="fw-bold" Variant="Variant.Filled"
+                Color="Color.Primary">Delete</MudButton>
+        </MudStack>
+    </MudStack>
+}
+
+@code {
+}

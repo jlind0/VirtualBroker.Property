@@ -5,7 +5,7 @@ namespace VirtualBroker.Property.Core;
 
 public interface IAPIRequests_Zillow : IEntity<Guid>, INamedEntity, ICodedEntity
 {
-    string ApIKey { get; set; }
+    string ApiKey { get; set; }
     string ApiHost { get; set; }
     string RequestUri { get; set; }
 }
@@ -15,7 +15,7 @@ public partial class APIRequests_Zillow : Entity<Guid>, IAPIRequests_Zillow
 
     public string Code { get; set; } = null!;
 
-    public string ApIKey { get; set; } = null!;
+    public string ApiKey { get; set; } = null!;
 
     public string ApiHost { get; set; } = null!;
 
